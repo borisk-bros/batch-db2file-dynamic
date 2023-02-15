@@ -8,9 +8,9 @@ CREATE TABLE people  (
 
 INSERT INTO people VALUES (1, 'Sumeet', 'Sharma');
 INSERT INTO people VALUES (2, 'Matthew', 'Gupta');
-INSERT INTO people VALUES (3, 'Haroon', 'Siddiqui');
+INSERT INTO people VALUES (3, 'Joseph', 'Lee');
 INSERT INTO people VALUES (4, 'Jim', 'Wolsey');
 INSERT INTO people VALUES (5, 'Sai', 'Sibbala');
-INSERT INTO people VALUES (6, 'Ashish', 'Mishra');
+INSERT INTO people VALUES (6, 'Gigi', 'Bhullar');
 
 

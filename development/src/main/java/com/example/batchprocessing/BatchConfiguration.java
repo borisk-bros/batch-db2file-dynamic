@@ -1,6 +1,7 @@
 package com.example.batchprocessing;
 
 import com.example.batchprocessing.model.Person;
+import com.example.batchprocessing.utility.ResourceReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -12,9 +13,11 @@ import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 
 import javax.sql.DataSource;
 
@@ -28,11 +31,14 @@ public class BatchConfiguration {
 	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
+	@Value("classpath:query.sql")
+	private Resource resource;
+
 	@Bean
 	public JdbcCursorItemReader<Person> reader(DataSource dataSource) {
 		JdbcCursorItemReader<Person> reader = new JdbcCursorItemReader<>();
 		reader.setDataSource(dataSource);
-		reader.setSql("SELECT first_name, last_name FROM people");
+		reader.setSql(ResourceReader.asString(resource));
 		reader.setRowMapper((rs, i) -> {
 			Person person = new Person();
 			person.setFirstName(rs.getString(1));

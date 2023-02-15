@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
+    /**
+     * This method is used for validation of the batch process only, can be replaced by proper testing
+     * @param jobExecution the job execution instance
+     */
     @Override
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
@@ -33,7 +37,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                     .build();
 
             reader.open(jobExecution.getExecutionContext());
-            
+
             try {
                 Person person;
                 while ((person = reader.read()) != null) {
@@ -41,6 +45,9 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                 }
             } catch(Exception ex) {
                 log.error(ex.getMessage());
+            }
+            finally {
+                reader.close();
             }
         }
     }
