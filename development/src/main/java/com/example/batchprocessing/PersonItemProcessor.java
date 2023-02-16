@@ -4,6 +4,9 @@ import com.example.batchprocessing.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 
+/**
+ * Test
+ */
 @Slf4j
 public class PersonItemProcessor implements ItemProcessor<Person, Person> {
 
