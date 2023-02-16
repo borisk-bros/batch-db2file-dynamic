@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
 
 /**
- * Test1
+ * Just a javadoc
  */
 @Slf4j
 public class PersonItemProcessor implements ItemProcessor<Person, Person> {
